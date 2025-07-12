@@ -17,6 +17,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsClock, BsWallet } from "react-icons/bs";
 import { FiCopy } from "react-icons/fi";
+import { jsxDEV } from "react/jsx-dev-runtime";
 
 interface Qr {
   qrcode_url: string;
@@ -69,6 +70,22 @@ const Widget = () => {
   useEffect(() => {
     if (localStorage.getItem(LOCALSTORAGE_ACC)) {
       setiduser(localStorage.getItem(LOCALSTORAGE_ACC));
+    }
+  }, []);
+
+  useEffect(() => {
+    const iframe: HTMLIFrameElement | null = document.querySelector("#dota");
+
+    if (iframe) {
+      const changeurl = () => {
+        
+      };
+
+      iframe.addEventListener("load", changeurl);
+
+      return () => {
+        iframe.removeEventListener("load", changeurl);
+      };
     }
   }, []);
 
@@ -252,12 +269,12 @@ const Widget = () => {
       </Modal>
       {iduser && (
         <div className="fixed bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
-          <Tooltip content="Recargar créditos" isOpen={isOpenTooltip}>
+          <Tooltip content="Recargar créditos" isOpen placement="left">
             <Image
               onClick={onOpen}
               src="/coin.png"
               alt="Reload"
-              className="bg-white shadow-lg border-1 border-gray-300 cursor-pointer rounded-full p-2 object-cover hover:brightness-70"
+              className="bg-gray-700/70 shadow-lg border-1 border-gray-300 cursor-pointer rounded-full object-cover hover:brightness-70"
               width={60}
               height={60}
               onMouseEnter={() => setIsOpenTooltip(true)}

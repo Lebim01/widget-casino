@@ -6,8 +6,7 @@ export default function Home() {
     <div className="relative w-full h-screen bg-white">
       <Toaster />
       <Widget />
-      <iframe src="https://dota.click" className="h-full w-full" />
-      
+      <iframe id="dota" src="https://dota.click" className="h-full w-full" />
     </div>
   );
 }
