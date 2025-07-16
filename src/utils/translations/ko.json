@@ -6,5 +6,8 @@
   "something_was_wrong": "예기치 않은 문제가 발생했습니다. 나중에 다시 시도해주세요.",
   "deposit_credits": "크레딧 입금",
   "deposit_success": "입금이 성공적으로 완료되었습니다",
-  "cancel": "취소"
+  "cancel": "취소",
+  "pending": "보류 중",
+  "canceled": "취소됨",
+  "approved": "승인됨"
 }

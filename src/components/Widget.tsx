@@ -14,6 +14,7 @@ import DepositForm from "./DepositForm";
 import WithdrawForm from "./WithdrawForm";
 import LanguageDropdown from "./LanguageDropdown";
 import { useTranslation } from "react-i18next";
+import TransactionList from "./TransactionList";
 
 const LOCALSTORAGE_ACC = "acc";
 
@@ -107,7 +108,7 @@ const Widget = () => {
   return (
     <>
       {usertoken && (
-        <Popover>
+        <Popover placement="top-end">
           <PopoverTrigger>
             <div className="fixed bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
               <Tooltip
@@ -149,6 +150,13 @@ const Widget = () => {
                   <Card>
                     <CardBody>
                       <WithdrawForm usertoken={usertoken} />
+                    </CardBody>
+                  </Card>
+                </Tab>
+                <Tab key="transactions" title={t("transactions")}>
+                  <Card>
+                    <CardBody>
+                      <TransactionList usertoken={usertoken} />
                     </CardBody>
                   </Card>
                 </Tab>

@@ -165,8 +165,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
         </div>
       )}
       {step == 2 && (
-        <div className="flex flex-col items-center justify-center gap-4 mb-4">
-          <span className="">{t("enter_deposit_amount")}</span>
+        <div className="flex flex-col items-center justify-center gap-4 mb-4 max-w-[400px]">
           <span className="text-yellow-500">Red BEP20</span>
           <div>
             {!data && <Spinner />}

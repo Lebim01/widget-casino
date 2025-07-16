@@ -8,5 +8,8 @@
   "deposit_success": "Deposit successful",
   "cancel": "Cancel",
   "wallet": "Wallet",
-  "amount": "Amount"
+  "amount": "Amount",
+  "pending": "Penging",
+  "canceled": "Canceled",
+  "approved": "Approved"
 }

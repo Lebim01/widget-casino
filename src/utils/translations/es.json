@@ -6,5 +6,8 @@
   "something_was_wrong": "Ocurrio algo inesperado, intenta mas tarde",
   "deposit_credits": "Recargar creditos",
   "deposit_success": "Recarga exitosa",
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "pending": "Pendiente",
+  "canceled": "Cancelado",
+  "approved": "Aprobado"
 }
