@@ -47,7 +47,7 @@ const LanguageDropdown = () => {
   };
 
   return (
-    <Dropdown placement="bottom-end">
+    <Dropdown placement="bottom-start">
       <DropdownTrigger>
         <div>
           <Language {...languagues[i18n.language]} />

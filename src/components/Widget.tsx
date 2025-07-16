@@ -15,12 +15,14 @@ import WithdrawForm from "./WithdrawForm";
 import LanguageDropdown from "./LanguageDropdown";
 import { useTranslation } from "react-i18next";
 import TransactionList from "./TransactionList";
+import { FaTimes } from "react-icons/fa";
 
 const LOCALSTORAGE_ACC = "acc";
 
 const Widget = () => {
   const { t } = useTranslation();
 
+  const [isOpenPopover, setIsOpenPopover] = useState(false);
   const [isOpenTooltip, setIsOpenTooltip] = useState(true);
   const [usertoken, settokenuser] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{
@@ -108,7 +110,13 @@ const Widget = () => {
   return (
     <>
       {usertoken && (
-        <Popover placement="top-end">
+        <Popover
+          placement="top-end"
+          showArrow
+          backdrop="opaque"
+          isOpen={isOpenPopover}
+          onOpenChange={(open) => setIsOpenPopover(open)}
+        >
           <PopoverTrigger>
             <div className="fixed bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
               <Tooltip
@@ -130,11 +138,14 @@ const Widget = () => {
             </div>
           </PopoverTrigger>
           <PopoverContent>
-            <div>
-              <div className="flex justify-end">
+            <div className="flex flex-col gap-2 pt-2 max-w-[90dvw]">
+              <div className="flex justify-between">
                 <LanguageDropdown />
+                <FaTimes
+                  className="text-xl"
+                  onClick={() => setIsOpenPopover(false)}
+                />
               </div>
-              <br />
               <Tabs>
                 <Tab key="deposit" title={t("deposit")}>
                   <Card>
