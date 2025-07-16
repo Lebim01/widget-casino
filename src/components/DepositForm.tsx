@@ -4,6 +4,7 @@ import { api } from "@/utils";
 import { Button, Input, Spinner } from "@heroui/react";
 import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { BsClock, BsWallet } from "react-icons/bs";
 import { FiCopy } from "react-icons/fi";
 
@@ -20,6 +21,8 @@ type Props = {
 };
 
 const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
+  const { t } = useTranslation();
+
   const [amount, setAmount] = useState("");
   const [step, setStep] = useState(1);
   const [data, setData] = useState<null | Qr>(null);
@@ -115,18 +118,18 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     <div className="min-w-[300px]">
       {step == 1 && (
         <div className="flex flex-col items-center justify-center gap-4 mb-4">
-          <span className="">Introduce la cantidad deseada</span>
+          <span className="">{t("enter_deposit_amount")}</span>
           <Input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             type="number"
           />
-          <Button onPress={() => setStep(2)}>Recargar</Button>
+          <Button onPress={() => setStep(2)}>{t("deposit")}</Button>
         </div>
       )}
       {step == 2 && (
         <div className="flex flex-col items-center justify-center gap-4 mb-4">
-          <span className="">Introduce la cantidad deseada a recargar</span>
+          <span className="">{t("enter_deposit_amount")}</span>
           <span className="text-yellow-500">Red BEP20</span>
           <div>
             {!data && <Spinner />}

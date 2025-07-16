@@ -13,10 +13,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import DepositForm from "./DepositForm";
 import WithdrawForm from "./WithdrawForm";
+import LanguageDropdown from "./LanguageDropdown";
+import { useTranslation } from "react-i18next";
 
 const LOCALSTORAGE_ACC = "acc";
 
 const Widget = () => {
+  const { t } = useTranslation();
+
   const [isOpenTooltip, setIsOpenTooltip] = useState(true);
   const [usertoken, settokenuser] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{
@@ -87,14 +91,14 @@ const Widget = () => {
 
   const resetTooltip = () => {
     setTooltip({
-      title: "Recargar créditos",
+      title: t("deposit_credits"),
       color: "default",
     });
   };
 
   const showSuccessDeposit = () => {
     setTooltip({
-      title: "Recarga exitosa",
+      title: t("deposit_success"),
       color: "success",
     });
     setIsOpenTooltip(true);
@@ -126,8 +130,12 @@ const Widget = () => {
           </PopoverTrigger>
           <PopoverContent>
             <div>
+              <div className="flex justify-end">
+                <LanguageDropdown />
+              </div>
+              <br />
               <Tabs>
-                <Tab key="deposit" title="Depositar">
+                <Tab key="deposit" title={t("deposit")}>
                   <Card>
                     <CardBody>
                       <DepositForm
@@ -137,7 +145,7 @@ const Widget = () => {
                     </CardBody>
                   </Card>
                 </Tab>
-                <Tab key="withdraw" title="Retirar">
+                <Tab key="withdraw" title={t("withdraw")}>
                   <Card>
                     <CardBody>
                       <WithdrawForm usertoken={usertoken} />

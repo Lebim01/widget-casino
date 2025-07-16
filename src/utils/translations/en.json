@@ -1,0 +1,9 @@
+{
+  "deposit": "Deposit",
+  "withdraw": "Withdraw",
+  "enter_deposit_amount": "Enter amount",
+  "enter_withdraw_amount": "Enter amount",
+  "something_was_wrong": "Something went wrong, please try again later",
+  "deposit_credits": "Deposit credits",
+  "deposit_success": "Deposit successful"
+}

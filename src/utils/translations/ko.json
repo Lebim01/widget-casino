@@ -1,0 +1,9 @@
+{
+  "deposit": "입금",
+  "withdraw": "출금",
+  "enter_deposit_amount": "금액을 입력하세요",
+  "enter_withdraw_amount": "금액을 입력하세요",
+  "something_was_wrong": "예기치 않은 문제가 발생했습니다. 나중에 다시 시도해주세요.",
+  "deposit_credits": "크레딧 입금",
+  "deposit_success": "입금이 성공적으로 완료되었습니다"
+}

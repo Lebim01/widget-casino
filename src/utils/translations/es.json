@@ -1,0 +1,9 @@
+{
+  "deposit": "Depositar",
+  "withdraw": "Retirar",
+  "enter_deposit_amount": "Ingresa la cantidad",
+  "enter_withdraw_amount": "Ingresa la cantidad",
+  "something_was_wrong": "Ocurrio algo inesperado, intenta mas tarde",
+  "deposit_credits": "Recargar creditos",
+  "deposit_success": "Recarga exitosa"
+}
