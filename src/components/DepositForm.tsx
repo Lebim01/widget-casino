@@ -16,9 +16,10 @@ interface Qr {
 
 type Props = {
   usertoken: string;
+  onComplete: () => void;
 };
 
-const DepositForm: FC<Props> = ({ usertoken }) => {
+const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   const [amount, setAmount] = useState("");
   const [step, setStep] = useState(1);
   const [data, setData] = useState<null | Qr>(null);
@@ -94,6 +95,8 @@ const DepositForm: FC<Props> = ({ usertoken }) => {
           await api.post(`/disruptive/completed-transaction-casino`, {
             address: data.address,
           });
+
+          onComplete();
         } catch (err) {
           console.error("Polling error:", err);
         }

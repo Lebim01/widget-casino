@@ -1,17 +1,13 @@
 import {
   Card,
   CardBody,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
   Popover,
   PopoverContent,
   PopoverTrigger,
   Tab,
   Tabs,
   Tooltip,
-  useDisclosure,
+  ThemeColors,
 } from "@heroui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -23,6 +19,20 @@ const LOCALSTORAGE_ACC = "acc";
 const Widget = () => {
   const [isOpenTooltip, setIsOpenTooltip] = useState(true);
   const [usertoken, settokenuser] = useState<string | null>(null);
+  const [tooltip, setTooltip] = useState<{
+    title: string;
+    color:
+      | "default"
+      | "foreground"
+      | "primary"
+      | "secondary"
+      | "success"
+      | "warning"
+      | "danger";
+  }>({
+    title: "Recargar créditos",
+    color: "default",
+  });
 
   useEffect(() => {
     if (localStorage.getItem(LOCALSTORAGE_ACC)) {
@@ -67,10 +77,28 @@ const Widget = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsOpenTooltip(false);
-    }, 15 * 1000);
-  }, []);
+    if (isOpenTooltip) {
+      setTimeout(() => {
+        setIsOpenTooltip(false);
+        resetTooltip();
+      }, 15 * 1000);
+    }
+  }, [isOpenTooltip]);
+
+  const resetTooltip = () => {
+    setTooltip({
+      title: "Recargar créditos",
+      color: "default",
+    });
+  };
+
+  const showSuccessDeposit = () => {
+    setTooltip({
+      title: "Recarga exitosa",
+      color: "success",
+    });
+    setIsOpenTooltip(true);
+  };
 
   return (
     <>
@@ -79,9 +107,10 @@ const Widget = () => {
           <PopoverTrigger>
             <div className="fixed bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
               <Tooltip
-                content="Recargar créditos"
+                content={tooltip.title}
                 isOpen={isOpenTooltip}
                 placement="left"
+                color={tooltip.color}
               >
                 <Image
                   src="/coin.png"
@@ -101,7 +130,10 @@ const Widget = () => {
                 <Tab key="deposit" title="Depositar">
                   <Card>
                     <CardBody>
-                      <DepositForm usertoken={usertoken} />
+                      <DepositForm
+                        usertoken={usertoken}
+                        onComplete={showSuccessDeposit}
+                      />
                     </CardBody>
                   </Card>
                 </Tab>
