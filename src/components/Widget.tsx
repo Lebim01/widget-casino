@@ -7,7 +7,6 @@ import {
   Tab,
   Tabs,
   Tooltip,
-  ThemeColors,
 } from "@heroui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";

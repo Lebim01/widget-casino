@@ -99,6 +99,9 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
             address: data.address,
           });
 
+          localStorage.removeItem("paymentData");
+          setData(null);
+
           onComplete();
         } catch (err) {
           console.error("Polling error:", err);
