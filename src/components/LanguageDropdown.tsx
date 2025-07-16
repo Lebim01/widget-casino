@@ -24,7 +24,7 @@ const languagues: any = {
 
 const Language = (props: { label: string; flag: string }) => {
   return (
-    <div className="flex items-center gap-2 border py-1 px-2 border-gray-800 rounded-md hover:cursor-pointer">
+    <div className="flex items-center gap-2 border py-1 px-2 border-gray-800 rounded-md hover:cursor-pointer text-white">
       <img src={props.flag} alt="flag" className="w-4" /> {props.label}
     </div>
   );

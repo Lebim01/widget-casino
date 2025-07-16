@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BsClock, BsWallet } from "react-icons/bs";
+import { FaCheck } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
 
 interface Qr {
@@ -26,6 +27,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   const [amount, setAmount] = useState("");
   const [step, setStep] = useState(1);
   const [data, setData] = useState<null | Qr>(null);
+  const [success, setSuccess] = useState(false);
 
   const convertToTimestamp = (date: any): Date | null => {
     if (!date) return null;
@@ -71,6 +73,25 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     }
   };
 
+  const cancelQR = async () => {
+    if (data?.address) {
+      try {
+        const res = await api.post(`/disruptive/cancel-transaction-casino`, {
+          address: data.address,
+          usertoken: usertoken,
+        });
+
+        if (res.status == 201) {
+          setData(null);
+          setStep(1);
+          localStorage.removeItem("paymentData");
+        }
+      } catch (error) {
+        console.error("Fallo al obtener la data", error);
+      }
+    }
+  };
+
   useEffect(() => {
     getData();
   }, [step]);
@@ -102,6 +123,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
           localStorage.removeItem("paymentData");
           setData(null);
           setStep(1);
+          setSuccess(true);
 
           onComplete();
         } catch (err) {
@@ -117,6 +139,14 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
       };
     }
   }, [data?.expires_at]);
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        setSuccess(false);
+      }, 10 * 1000);
+    }
+  }, [success]);
 
   return (
     <div className="min-w-[300px]">
@@ -150,7 +180,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
                 )}
                 <Input
                   readOnly
-                  startContent={<BsWallet />}
+                  startContent={<BsWallet className="text-white" />}
                   value={isExpired ? "" : data?.address || ""}
                   className=""
                   endContent={
@@ -172,15 +202,15 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
                   {!isExpired ? (
                     <Input
                       readOnly
-                      startContent={<BsClock />}
+                      startContent={<BsClock className="text-white" />}
                       value={timer}
                       className="font-nexabold"
                     />
                   ) : null}
                   <Input
                     readOnly
-                    className="font-nexabold flex items-center"
-                    startContent={["USDT"]}
+                    className="font-nexabold flex items-center w-full"
+                    startContent={<span className="text-white">USDT</span>}
                     value={isExpired ? "" : data.amount.toFixed(2)}
                     endContent={
                       <div className="flex items-center space-x-2">
@@ -197,6 +227,14 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
               </div>
             )}
           </div>
+          <Button onPress={() => cancelQR()}>{t("cancel")}</Button>
+        </div>
+      )}
+
+      {success && (
+        <div className="flex flex-col items-center gap-2 border border-success p-2 rounded-lg">
+          <FaCheck className="text-success text-2xl" />
+          <span>{t("deposit_success")}</span>
         </div>
       )}
     </div>
