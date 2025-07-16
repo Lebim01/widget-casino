@@ -11,5 +11,6 @@
   "amount": "Amount",
   "pending": "Pending",
   "cancelled": "Cancelled",
-  "approved": "Approved"
+  "approved": "Approved",
+  "transactions": "Transactions"
 }

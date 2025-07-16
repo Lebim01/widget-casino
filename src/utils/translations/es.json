@@ -9,5 +9,8 @@
   "cancel": "Cancelar",
   "pending": "Pendiente",
   "cancelled": "Cancelado",
-  "approved": "Aprobado"
+  "approved": "Aprobado",
+  "transactions": "Transacciones",
+  "amount": "Cantidad",
+  "wallet": "Wallet"
 }

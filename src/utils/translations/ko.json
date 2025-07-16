@@ -9,5 +9,8 @@
   "cancel": "취소",
   "pending": "보류 중",
   "cancelled": "취소됨",
-  "approved": "승인됨"
+  "approved": "승인됨",
+  "transactions": "거래내역",
+  "amount": "금액",
+  "wallet": "지갑"
 }
