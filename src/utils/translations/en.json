@@ -9,7 +9,7 @@
   "cancel": "Cancel",
   "wallet": "Wallet",
   "amount": "Amount",
-  "pending": "Penging",
-  "canceled": "Canceled",
+  "pending": "Pending",
+  "cancelled": "Cancelled",
   "approved": "Approved"
 }

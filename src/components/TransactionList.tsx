@@ -44,7 +44,7 @@ const TransactionList: FC<Props> = ({ usertoken }) => {
   return (
     <div className="min-w-[300px] flex flex-col items-center">
       {loading && <Spinner size="sm" />}
-      <div className="max-h-[300px] overflow-auto w-full">
+      <div className="max-h-[300px] overflow-auto w-full flex flex-col gap-4">
         {list.map((r, index) => (
           <>
             <div key={index} className="flex flex-col gap-1 w-full">
@@ -55,26 +55,49 @@ const TransactionList: FC<Props> = ({ usertoken }) => {
                       className={
                         (r.status == "approved"
                           ? "text-success"
+                          : r.status == "pending"
+                          ? "text-warning"
                           : "text-neutral-200") + " flex items-center gap-1"
                       }
                     >
                       <FaArrowAltCircleDown />
-                      <span>+{r.amount} USDT</span>
+                      <span
+                        className={
+                          r.status == "cancelled" ? "line-through" : ""
+                        }
+                      >
+                        +{r.amount} USDT
+                      </span>
                     </span>
                   ) : (
                     <span className="text-danger flex items-center gap-1">
                       <FaArrowAltCircleDown />
-                      <span>-{r.amount} USDT</span>
+                      <span
+                        className={
+                          r.status == "cancelled" ? "line-through" : ""
+                        }
+                      >
+                        -{r.amount} USDT
+                      </span>
                     </span>
                   )}
                 </div>
-                <div>{t(r.status)}</div>
+                <div
+                  className={
+                    r.status == "approved"
+                      ? "text-success"
+                      : r.status == "pending"
+                      ? "text-warning"
+                      : "text-neutral-200"
+                  }
+                >
+                  {t(r.status)}
+                </div>
               </div>
               <div>
                 <span className="text-neutral-200 opacity-60">{r.address}</span>
               </div>
             </div>
-            <Spacer />
           </>
         ))}
       </div>

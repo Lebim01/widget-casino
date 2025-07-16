@@ -8,6 +8,6 @@
   "deposit_success": "입금이 성공적으로 완료되었습니다",
   "cancel": "취소",
   "pending": "보류 중",
-  "canceled": "취소됨",
+  "cancelled": "취소됨",
   "approved": "승인됨"
 }
