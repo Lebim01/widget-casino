@@ -74,18 +74,20 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   };
 
   const cancelQR = async () => {
-    if (data?.address) {
-      try {
-        const res = await api.post(`/disruptive/cancel-transaction-casino`, {
-          address: data.address,
-          usertoken: usertoken,
-        });
+    if (confirm("Are you sure?")) {
+      if (data?.address) {
+        try {
+          const res = await api.post(`/disruptive/cancel-transaction-casino`, {
+            address: data.address,
+            usertoken: usertoken,
+          });
 
-        if (res.status == 201) {
-          resetForm();
+          if (res.status == 201) {
+            resetForm();
+          }
+        } catch (error) {
+          console.error("Fallo al obtener la data", error);
         }
-      } catch (error) {
-        console.error("Fallo al obtener la data", error);
       }
     }
   };
@@ -210,7 +212,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
                   ) : null}
                   <Input
                     readOnly
-                    className="font-nexabold flex items-center w-full"
+                    className="font-nexabold w-full"
                     startContent={<span className="text-white">USDT</span>}
                     value={isExpired ? "" : data.amount.toFixed(2)}
                     endContent={
@@ -228,7 +230,9 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
               </div>
             )}
           </div>
-          <Button onPress={() => cancelQR()}>{t("cancel")}</Button>
+          <Button onPress={() => cancelQR()} className="w-full" color="danger">
+            {t("cancel")}
+          </Button>
         </div>
       )}
 

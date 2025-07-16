@@ -6,5 +6,7 @@
   "something_was_wrong": "Something went wrong, please try again later",
   "deposit_credits": "Deposit credits",
   "deposit_success": "Deposit successful",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "wallet": "Wallet",
+  "amount": "Amount"
 }

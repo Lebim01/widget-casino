@@ -10,6 +10,7 @@ type Props = {
 const WithdrawForm: FC<Props> = ({ usertoken }) => {
   const { t } = useTranslation();
 
+  const [wallet, setWallet] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [response, setReponse] = useState<null | {
@@ -40,14 +41,26 @@ const WithdrawForm: FC<Props> = ({ usertoken }) => {
   return (
     <div className="min-w-[300px]">
       <div className="flex flex-col items-center justify-center gap-4 mb-4">
-        <span className="">{t("enter_withdraw_amount")}</span>
+        <span className="text-white">{t("enter_withdraw_amount")}</span>
+        <Input
+          value={wallet}
+          onChange={(e) => setWallet(e.target.value)}
+          type="text"
+          placeholder={t("wallet") + " (BEP20)"}
+          isReadOnly={loading}
+        />
         <Input
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           type="number"
+          placeholder={t("amount")}
           isReadOnly={loading}
         />
-        <Button isLoading={loading} onPress={() => exec()}>
+        <Button
+          isLoading={loading}
+          onPress={() => exec()}
+          isDisabled={!wallet || !amount}
+        >
           {t("withdraw")}
         </Button>
 
