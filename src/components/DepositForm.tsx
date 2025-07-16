@@ -91,7 +91,7 @@ const DepositForm: FC<Props> = ({ usertoken }) => {
 
           if (res.data != "OK") return;
 
-          await api.post(`/disruptive/completed-transaction-deposit`, {
+          await api.post(`/disruptive/completed-transaction-casino`, {
             address: data.address,
           });
         } catch (err) {
