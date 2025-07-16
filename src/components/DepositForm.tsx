@@ -101,6 +101,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
 
           localStorage.removeItem("paymentData");
           setData(null);
+          setStep(1);
 
           onComplete();
         } catch (err) {

@@ -73,6 +73,7 @@ const Widget = () => {
       if (event.data.tipo == "logout") {
         settokenuser(null);
         localStorage.removeItem(LOCALSTORAGE_ACC);
+        localStorage.removeItem("paymentData");
       }
     };
     window.addEventListener("message", handler);
