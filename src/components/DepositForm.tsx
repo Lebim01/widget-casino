@@ -51,7 +51,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
         setData(parsed);
         setStep(2);
       } else {
-        localStorage.removeItem("paymentData");
+        resetForm();
       }
     }
   }, []);
@@ -82,14 +82,19 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
         });
 
         if (res.status == 201) {
-          setData(null);
-          setStep(1);
-          localStorage.removeItem("paymentData");
+          resetForm();
         }
       } catch (error) {
         console.error("Fallo al obtener la data", error);
       }
     }
+  };
+
+  const resetForm = () => {
+    setData(null);
+    setStep(1);
+    localStorage.removeItem("paymentData");
+    setAmount("");
   };
 
   useEffect(() => {
@@ -120,11 +125,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
             address: data.address,
           });
 
-          localStorage.removeItem("paymentData");
-          setData(null);
-          setStep(1);
-          setSuccess(true);
-
+          resetForm();
           onComplete();
         } catch (err) {
           console.error("Polling error:", err);
@@ -152,7 +153,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     <div className="min-w-[300px]">
       {step == 1 && (
         <div className="flex flex-col items-center justify-center gap-4 mb-4">
-          <span className="">{t("enter_deposit_amount")}</span>
+          <span className="text-white">{t("enter_deposit_amount")}</span>
           <Input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
