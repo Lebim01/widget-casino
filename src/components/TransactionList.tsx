@@ -2,7 +2,7 @@ import { api } from "@/utils";
 import { Spacer, Spinner } from "@heroui/react";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FaArrowAltCircleDown } from "react-icons/fa";
+import { FaArrowAltCircleDown, FaTimes } from "react-icons/fa";
 
 type Props = {
   usertoken: string;
@@ -40,6 +40,17 @@ const TransactionList: FC<Props> = ({ usertoken }) => {
   useEffect(() => {
     getData();
   }, []);
+
+  const cancelWithdraw = async () => {
+    try {
+      await api.post("/disruptive/cancel-withdraw-casino", {
+        usertoken,
+      });
+      getData();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="w-full md:min-w-[300px] flex flex-col items-center">
@@ -91,7 +102,14 @@ const TransactionList: FC<Props> = ({ usertoken }) => {
                       : "text-neutral-200"
                   }
                 >
-                  {t(r.status)}
+                  {t(r.status)}{" "}
+                  {r.status == "pending" && r.type == "withdraw" && (
+                    <FaTimes
+                      className="text-danger"
+                      title="Cancel"
+                      onClick={cancelWithdraw}
+                    />
+                  )}
                 </div>
               </div>
               <div>
