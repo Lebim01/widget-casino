@@ -47,20 +47,6 @@ const Widget = () => {
   }, []);
 
   useEffect(() => {
-    const iframe: HTMLIFrameElement | null = document.querySelector("#dota");
-
-    if (iframe) {
-      const changeurl = () => {};
-
-      iframe.addEventListener("load", changeurl);
-
-      return () => {
-        iframe.removeEventListener("load", changeurl);
-      };
-    }
-  }, []);
-
-  useEffect(() => {
     const handler = (
       event: MessageEvent<{
         tipo: "login" | "logout";
@@ -112,13 +98,12 @@ const Widget = () => {
       {usertoken && (
         <Popover
           placement="top-end"
-          showArrow
           backdrop="opaque"
           isOpen={isOpenPopover}
-          onOpenChange={(open) => setIsOpenPopover(open)}
+          onOpenChange={(isOpen) => setIsOpenPopover(isOpen)}
         >
           <PopoverTrigger>
-            <div className="fixed bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
+            <div className="absolute bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
               <Tooltip
                 content={tooltip.title}
                 isOpen={isOpenTooltip}
@@ -138,7 +123,7 @@ const Widget = () => {
             </div>
           </PopoverTrigger>
           <PopoverContent>
-            <div className="flex flex-col gap-2 pt-2 max-w-[90dvw]">
+            <div className="flex flex-col gap-2 pt-2 w-full max-w-[90vw] lg:min-w-[300px]">
               <div className="flex justify-between">
                 <LanguageDropdown />
                 <FaTimes

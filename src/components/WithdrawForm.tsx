@@ -39,7 +39,7 @@ const WithdrawForm: FC<Props> = ({ usertoken }) => {
   };
 
   return (
-    <div className="min-w-[300px]">
+    <div className="w-full md:min-w-[300px]">
       <div className="flex flex-col items-center justify-center gap-4 mb-4">
         <span className="text-white">{t("enter_withdraw_amount")}</span>
         <Input

@@ -152,7 +152,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   }, [success]);
 
   return (
-    <div className="min-w-[300px]">
+    <div className="w-full lg:min-w-[300px]">
       {step == 1 && (
         <div className="flex flex-col items-center justify-center gap-4 mb-4">
           <span className="text-white">{t("enter_deposit_amount")}</span>

@@ -1,4 +1,5 @@
 import Widget from "@/components/Widget";
+import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
 export default function Home() {

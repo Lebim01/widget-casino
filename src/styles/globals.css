@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @plugin './hero.ts';
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
-@custom-variant dark (&:is(.dark *));
 
 :root {
   --background: #ffffff;
@@ -28,8 +27,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-input,
-select,
-textarea {
-  font-size: 16px;
+
+html {
+  font-size      : 100%;
+  scroll-behavior: smooth;
 }

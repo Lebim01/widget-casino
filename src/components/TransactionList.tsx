@@ -42,7 +42,7 @@ const TransactionList: FC<Props> = ({ usertoken }) => {
   }, []);
 
   return (
-    <div className="min-w-[300px] flex flex-col items-center">
+    <div className="w-full md:min-w-[300px] flex flex-col items-center">
       {loading && <Spinner size="sm" />}
       <div className="max-h-[300px] overflow-auto w-full flex flex-col gap-4">
         {list.map((r, index) => (
