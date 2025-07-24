@@ -1,7 +1,7 @@
 import useClipboard from "@/hooks/useClipboard";
 import useTimer from "@/hooks/useTimer";
 import { api } from "@/utils";
-import { Button, Input, Spinner } from "@heroui/react";
+import { Button, Input, Select, SelectItem, Spinner } from "@heroui/react";
 import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,7 +23,7 @@ type Props = {
 
 const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   const { t } = useTranslation();
-
+  const [selectedNetwork, setSelectNetowrk] = useState(["TRX"]);
   const [amount, setAmount] = useState("");
   const [step, setStep] = useState(1);
   const [data, setData] = useState<null | Qr>(null);
@@ -124,6 +124,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
           if (res.data != "OK") return;
 
           await api.post(`/disruptive/completed-transaction-casino`, {
+            network: selectedNetwork[0],
             address: data.address,
           });
 
@@ -156,10 +157,23 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
       {step == 1 && (
         <div className="flex flex-col items-center justify-center gap-4 mb-4">
           <span className="text-white">{t("enter_deposit_amount")}</span>
+          <Select
+            selectedKeys={selectedNetwork}
+            onSelectionChange={(keys: any) =>
+              setSelectNetowrk(Array.from(keys))
+            }
+            label={t("network")}
+          >
+            <SelectItem key="TRX">TRX (TRC20)</SelectItem>
+            <SelectItem key="BSC">BSC (BEP20)</SelectItem>
+            <SelectItem key="ETH">ETH (ERC20)</SelectItem>
+            <SelectItem key="POLYGON">POLYGON (ERC20)</SelectItem>
+          </Select>
           <Input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             type="number"
+            label={t("amount")}
           />
           <Button onPress={() => setStep(2)}>{t("deposit")}</Button>
         </div>
@@ -180,6 +194,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
                 ) : (
                   <Spinner />
                 )}
+
                 <Input
                   readOnly
                   startContent={<BsWallet className="text-white" />}

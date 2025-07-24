@@ -12,5 +12,6 @@
   "approved": "승인됨",
   "transactions": "거래내역",
   "amount": "금액",
-  "wallet": "지갑"
+  "wallet": "지갑",
+  "network": "그리드"
 }

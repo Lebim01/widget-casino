@@ -12,5 +12,6 @@
   "approved": "Aprobado",
   "transactions": "Transacciones",
   "amount": "Cantidad",
-  "wallet": "Wallet"
+  "wallet": "Wallet",
+  "network": "Red"
 }

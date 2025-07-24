@@ -12,5 +12,6 @@
   "pending": "Pending",
   "cancelled": "Cancelled",
   "approved": "Approved",
-  "transactions": "Transactions"
+  "transactions": "Transactions",
+  "network": "Network"
 }
