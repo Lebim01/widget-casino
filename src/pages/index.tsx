@@ -7,7 +7,7 @@ export default function Home() {
     <div className="relative w-full h-[100dvh] bg-white">
       <Toaster />
       <Widget />
-      <iframe id="dota" src="https://dota.click" className="h-full w-full" />
+      <iframe id="dota" src="https://dota4korea.com" className="h-full w-full" />
     </div>
   );
 }
