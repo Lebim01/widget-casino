@@ -11,7 +11,7 @@ const Iframe = () => {
   return (
     <iframe
       id="dota"
-      src={`https://games.${domain}.com`}
+      src={`https://games.${domain}`}
       className="h-full w-full"
     />
   );
