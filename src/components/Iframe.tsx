@@ -6,6 +6,8 @@ const Iframe = () => {
     typeof window != "undefined" ? window.location.hostname : ""
   );
 
+  if (!domain) return null;
+
   return (
     <iframe
       id="dota"
