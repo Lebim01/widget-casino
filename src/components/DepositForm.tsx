@@ -60,6 +60,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     if (step != 2) return;
     try {
       const res = await api.post(`/disruptive/create-transaction-casino`, {
+        network: selectedNetwork[0],
         amount,
         usertoken: usertoken,
       });
