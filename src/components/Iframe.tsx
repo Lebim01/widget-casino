@@ -3,7 +3,11 @@ import { useState } from "react";
 
 const Iframe = () => {
   const [domain] = useState(
-    typeof window != "undefined" ? window.location.hostname : ""
+    typeof window != "undefined"
+      ? window.location.hostname == "localhost"
+        ? "dotakorea.com"
+        : window.location.hostname
+      : ""
   );
 
   if (!domain) return null;

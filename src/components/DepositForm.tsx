@@ -57,8 +57,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     }
   }, []);
 
-  const getData = async () => {
-    if (step != 2) return;
+  const createQR = async () => {    
     setErrorMessage(null);
     try {
       const res = await api.post(`/disruptive/create-transaction-casino`, {
@@ -102,10 +101,6 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     localStorage.removeItem("paymentData");
     setAmount("");
   };
-
-  useEffect(() => {
-    getData();
-  }, [step]);
 
   useEffect(() => {
     if (isExpired) {
@@ -179,12 +174,12 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
             type="number"
             label={t("amount")}
           />
-          <Button onPress={() => setStep(2)}>{t("deposit")}</Button>
+          <Button onPress={() => createQR()}>{t("deposit")}</Button>
         </div>
       )}
       {step == 2 && (
         <div className="flex flex-col items-center justify-center gap-4 mb-4 max-w-[400px]">
-          <span className="text-yellow-500">Red BEP20</span>
+          <span className="text-yellow-500">Red {selectedNetwork[0]}</span>
           <div>
             {!data && <Spinner />}
             {data && (
