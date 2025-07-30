@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BsClock, BsWallet } from "react-icons/bs";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
 
 interface Qr {
@@ -28,6 +28,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<null | Qr>(null);
   const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   const convertToTimestamp = (date: any): Date | null => {
     if (!date) return null;
@@ -58,6 +59,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
 
   const getData = async () => {
     if (step != 2) return;
+    setErrorMessage(null);
     try {
       const res = await api.post(`/disruptive/create-transaction-casino`, {
         network: selectedNetwork[0],
@@ -71,6 +73,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
       }
     } catch (error) {
       console.error("Fallo al obtener la data", error);
+      setErrorMessage("error generate qr");
     }
   };
 
@@ -261,6 +264,13 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
         <div className="flex flex-col items-center gap-2 border border-success p-2 rounded-lg">
           <FaCheck className="text-success text-2xl" />
           <span>{t("deposit_success")}</span>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="flex flex-col items-center gap-2 border border-danger p-2 rounded-lg">
+          <FaTimes className="text-danger text-2xl" />
+          <span>{errorMessage}</span>
         </div>
       )}
     </div>
