@@ -13,5 +13,7 @@
   "transactions": "거래내역",
   "amount": "금액",
   "wallet": "지갑",
-  "network": "그리드"
+  "network": "그리드",
+  "login_instructions": "크레딧을 충전하려면 로그인하세요. 이미 로그인된 상태라면 로그아웃한 뒤 다시 시도해 보세요.",
+  "add_credits": "크레딧을 충전하세요"
 }

@@ -13,5 +13,7 @@
   "cancelled": "Cancelled",
   "approved": "Approved",
   "transactions": "Transactions",
-  "network": "Network"
+  "network": "Network",
+  "login_instructions": "Log in to add credits. If you already have an active session, try logging out and signing in again.",
+  "add_credits": "Add credits"
 }

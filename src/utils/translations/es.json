@@ -4,7 +4,6 @@
   "enter_deposit_amount": "Ingresa la cantidad",
   "enter_withdraw_amount": "Ingresa la cantidad",
   "something_was_wrong": "Ocurrio algo inesperado, intenta mas tarde",
-  "deposit_credits": "Recargar creditos",
   "deposit_success": "Recarga exitosa",
   "cancel": "Cancelar",
   "pending": "Pendiente",
@@ -13,5 +12,7 @@
   "transactions": "Transacciones",
   "amount": "Cantidad",
   "wallet": "Wallet",
-  "network": "Red"
+  "network": "Red",
+  "login_instructions": "Inicia sesión para recargar créditos. Si ya tienes una sesión abierta, cierra y vuelve a intentarlo.",
+  "add_credits": "Recarga créditos"
 }

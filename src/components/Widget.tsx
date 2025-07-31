@@ -36,7 +36,7 @@ const Widget = () => {
       | "warning"
       | "danger";
   }>({
-    title: "Recargar créditos",
+    title: t("add_credits"),
     color: "default",
   });
 
@@ -80,7 +80,7 @@ const Widget = () => {
 
   const resetTooltip = () => {
     setTooltip({
-      title: t("deposit_credits"),
+      title: t("add_credits"),
       color: "default",
     });
   };
@@ -95,7 +95,7 @@ const Widget = () => {
 
   return (
     <>
-      {usertoken && (
+      {usertoken ? (
         <Popover
           placement="top-end"
           backdrop="opaque"
@@ -157,6 +157,46 @@ const Widget = () => {
                   </Card>
                 </Tab>
               </Tabs>
+            </div>
+          </PopoverContent>
+        </Popover>
+      ) : (
+        <Popover
+          placement="top-end"
+          backdrop="opaque"
+          isOpen={isOpenPopover}
+          onOpenChange={(isOpen) => setIsOpenPopover(isOpen)}
+        >
+          <PopoverTrigger>
+            <div className="absolute bottom-30 right-4 md:bottom-4 md:right-12 text-white z-100">
+              <Tooltip
+                content={tooltip.title}
+                isOpen={isOpenTooltip}
+                placement="left"
+                color={tooltip.color}
+              >
+                <Image
+                  src="/coin.png"
+                  alt="Reload"
+                  className="bg-gray-700/80 shadow-lg border-1 border-gray-300 cursor-pointer rounded-full object-cover hover:brightness-70"
+                  width={60}
+                  height={60}
+                  onMouseEnter={() => setIsOpenTooltip(true)}
+                  onMouseLeave={() => setIsOpenTooltip(false)}
+                />
+              </Tooltip>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="flex flex-col gap-2 pt-2 w-full max-w-[90vw] lg:min-w-[300px]">
+              <div className="flex justify-between">
+                <LanguageDropdown />
+                <FaTimes
+                  className="text-xl"
+                  onClick={() => setIsOpenPopover(false)}
+                />
+              </div>
+              <div className="max-w-[300px] p-2">{t("login_instructions")}</div>
             </div>
           </PopoverContent>
         </Popover>
