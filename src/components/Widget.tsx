@@ -41,13 +41,19 @@ const Widget = () => {
     color: "default",
   });
 
+  const removetoken = () => {
+    settokenuser(null);
+    localStorage.removeItem(LOCALSTORAGE_ACC);
+    localStorage.removeItem("paymentData");
+  };
+
   useEffect(() => {
     if (localStorage.getItem(LOCALSTORAGE_ACC)) {
       const token = localStorage.getItem(LOCALSTORAGE_ACC);
       settokenuser(token);
 
-      api.get("/casino/valid?token=" + token).then((r) => {
-        console.log(r);
+      api.get("/casino/valid?token=" + token).catch((r) => {
+        removetoken();
       });
     }
   }, []);
@@ -66,9 +72,7 @@ const Widget = () => {
         localStorage.setItem(LOCALSTORAGE_ACC, token);
       }
       if (event.data.tipo == "logout") {
-        settokenuser(null);
-        localStorage.removeItem(LOCALSTORAGE_ACC);
-        localStorage.removeItem("paymentData");
+        removetoken();
       }
     };
     window.addEventListener("message", handler);
