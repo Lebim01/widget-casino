@@ -70,6 +70,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
 
       if (res.status == 201 && res.data) {
         setData(res.data);
+        setStep(2);
         localStorage.setItem("paymentData", JSON.stringify(res.data));
       }
     } catch (error) {
