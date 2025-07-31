@@ -16,6 +16,7 @@ import LanguageDropdown from "./LanguageDropdown";
 import { useTranslation } from "react-i18next";
 import TransactionList from "./TransactionList";
 import { FaTimes } from "react-icons/fa";
+import { api } from "@/utils";
 
 const LOCALSTORAGE_ACC = "acc";
 
@@ -42,7 +43,12 @@ const Widget = () => {
 
   useEffect(() => {
     if (localStorage.getItem(LOCALSTORAGE_ACC)) {
-      settokenuser(localStorage.getItem(LOCALSTORAGE_ACC));
+      const token = localStorage.getItem(LOCALSTORAGE_ACC);
+      settokenuser(token);
+
+      api.get("/casino/valid?token=" + token).then((r) => {
+        console.log(r);
+      });
     }
   }, []);
 
