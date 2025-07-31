@@ -29,6 +29,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
   const [data, setData] = useState<null | Qr>(null);
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
+  const [loading, setLoading] = useState(false);
 
   const convertToTimestamp = (date: any): Date | null => {
     if (!date) return null;
@@ -57,8 +58,9 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     }
   }, []);
 
-  const createQR = async () => {    
+  const createQR = async () => {
     setErrorMessage(null);
+    setLoading(true);
     try {
       const res = await api.post(`/disruptive/create-transaction-casino`, {
         network: selectedNetwork[0],
@@ -73,6 +75,8 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
     } catch (error) {
       console.error("Fallo al obtener la data", error);
       setErrorMessage("error generate qr");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -162,6 +166,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
               setSelectNetowrk(Array.from(keys))
             }
             label={t("network")}
+            isDisabled={loading}
           >
             <SelectItem key="TRX">TRX (TRC20)</SelectItem>
             <SelectItem key="BSC">BSC (BEP20)</SelectItem>
@@ -173,8 +178,11 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
             onChange={(e) => setAmount(e.target.value)}
             type="number"
             label={t("amount")}
+            isDisabled={loading}
           />
-          <Button onPress={() => createQR()}>{t("deposit")}</Button>
+          <Button onPress={() => createQR()} isLoading={loading}>
+            {t("deposit")}
+          </Button>
         </div>
       )}
       {step == 2 && (
