@@ -132,13 +132,10 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
 
           if (res.data != "OK") return;
 
-          await api.post(`/disruptive/completed-transaction-casino`, {
-            network: selectedNetwork[0],
-            address: data.address,
-          });
-
-          resetForm();
-          onComplete();
+          if (res.data == "completed") {
+            resetForm();
+            onComplete();
+          }
         } catch (err) {
           console.error("Polling error:", err);
         }
