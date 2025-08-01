@@ -14,6 +14,7 @@ interface Qr {
   address: string;
   expires_at: any;
   amount: number;
+  network: string;
 }
 
 type Props = {
@@ -51,6 +52,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
       const expiresAt = convertToTimestamp(parsed.expires_at);
       if (expiresAt && dayjs(expiresAt).isAfter(dayjs())) {
         setData(parsed);
+        setSelectNetowrk([parsed.network]);
         setStep(2);
       } else {
         resetForm();
@@ -71,7 +73,10 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
       if (res.status == 201 && res.data) {
         setData(res.data);
         setStep(2);
-        localStorage.setItem("paymentData", JSON.stringify(res.data));
+        localStorage.setItem(
+          "paymentData",
+          JSON.stringify({ ...res.data, network: selectedNetwork[0] })
+        );
       }
     } catch (error) {
       console.error("Fallo al obtener la data", error);
