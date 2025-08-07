@@ -1,8 +1,12 @@
 "use client";
-import { useState } from "react";
+import { FC, useState } from "react";
 import LoadingPage from "./LoadingPage";
 
-const Iframe = () => {
+type Props = {
+  cashier: string;
+};
+
+const Iframe: FC<Props> = ({ cashier }) => {
   const [loading, setLoading] = useState(true);
 
   const [domain] = useState(
@@ -19,7 +23,7 @@ const Iframe = () => {
     <>
       <iframe
         id="dota"
-        src={`https://games.${domain}`}
+        src={`https://games.${domain}?promo=${cashier}&registration=true `}
         className="h-full w-full"
         onLoad={(e) => {
           console.log(e);

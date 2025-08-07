@@ -21,7 +21,7 @@ export default function Home() {
     <div className="relative w-full h-[100dvh] bg-black">
       <Toaster />
       <Widget cashier={user} />
-      <Iframe />
+      <Iframe cashier={user} />
     </div>
   );
 }
