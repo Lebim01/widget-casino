@@ -20,9 +20,10 @@ interface Qr {
 type Props = {
   usertoken: string;
   onComplete: () => void;
+  cashier: string;
 };
 
-const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
+const DepositForm: FC<Props> = ({ usertoken, onComplete, cashier }) => {
   const { t } = useTranslation();
   const [selectedNetwork, setSelectNetowrk] = useState(["TRX"]);
   const [amount, setAmount] = useState("");
@@ -68,6 +69,7 @@ const DepositForm: FC<Props> = ({ usertoken, onComplete }) => {
         network: selectedNetwork[0],
         amount,
         usertoken: usertoken,
+        cashier,
       });
 
       if (res.status == 201 && res.data) {

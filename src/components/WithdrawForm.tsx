@@ -4,10 +4,11 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
+  cashier: string;
   usertoken: string;
 };
 
-const WithdrawForm: FC<Props> = ({ usertoken }) => {
+const WithdrawForm: FC<Props> = ({ usertoken, cashier }) => {
   const { t } = useTranslation();
 
   const [wallet, setWallet] = useState("");
@@ -25,6 +26,7 @@ const WithdrawForm: FC<Props> = ({ usertoken }) => {
       const res = await api.post(`/disruptive/withdraw-casino`, {
         amount,
         usertoken,
+        cashier,
       });
       setReponse(res.data);
     } catch (err) {

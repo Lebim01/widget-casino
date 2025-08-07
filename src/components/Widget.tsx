@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "@heroui/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import DepositForm from "./DepositForm";
 import WithdrawForm from "./WithdrawForm";
 import LanguageDropdown from "./LanguageDropdown";
@@ -20,7 +20,11 @@ import { api } from "@/utils";
 
 const LOCALSTORAGE_ACC = "acc";
 
-const Widget = () => {
+type Props = {
+  cashier: string;
+};
+
+const Widget: FC<Props> = ({ cashier }) => {
   const { t } = useTranslation();
 
   const [isOpenPopover, setIsOpenPopover] = useState(false);
@@ -147,6 +151,7 @@ const Widget = () => {
                     <CardBody>
                       <DepositForm
                         usertoken={usertoken}
+                        cashier={cashier}
                         onComplete={showSuccessDeposit}
                       />
                     </CardBody>
@@ -155,7 +160,7 @@ const Widget = () => {
                 <Tab key="withdraw" title={t("withdraw")}>
                   <Card>
                     <CardBody>
-                      <WithdrawForm usertoken={usertoken} />
+                      <WithdrawForm usertoken={usertoken} cashier={cashier} />
                     </CardBody>
                   </Card>
                 </Tab>
