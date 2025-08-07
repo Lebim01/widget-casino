@@ -23,10 +23,9 @@ const Iframe: FC<Props> = ({ cashier }) => {
     <>
       <iframe
         id="dota"
-        src={`https://games.${domain}?promo=${cashier}&registration=true `}
+        src={`https://games.${domain}`}
         className="h-full w-full"
         onLoad={(e) => {
-          console.log(e);
           setLoading(false);
         }}
       />
